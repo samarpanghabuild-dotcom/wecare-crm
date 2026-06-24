@@ -37,7 +37,7 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
     assignedToId: initialData?.assignedToId || initialData?.assignedTo?.id || '',
   });
 
-  useEffect(() => {
+    useEffect(() => {
     fetch('/api/dropdowns')
       .then(r => r.json())
       .then(items => {
@@ -52,7 +52,7 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
   }, [role]);
 
   function set(field: string, value: string) {
-    setForm(f => ({ ...f, [field]: value }));
+    setForm((f: typeof form) => ({ ...f, [field]: value }));
   }
 
   const showInsuranceCategory = form.productType === 'Insurance';
