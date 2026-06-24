@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./crm.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("ASSOCIATE")
+  branch    String?
+  region    String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  leads     Lead[]   @relation("AssignedLeads")
+  createdLeads Lead[] @relation("CreatedLeads")
+  auditLogs AuditLog[]
+}
+
+model Lead {
+  id                    String    @id @default(cuid())
+  leadId                String    @unique
+  date                  DateTime  @default(now())
+  customerName          String
+  mobile                String
+  altMobile             String?
+  email                 String?
+  city                  String?
+  state                 String?
+  pincode               String?
+  productType           String
+  insuranceCategory     String?
+  leadSource            String
+  employmentType        String?
+  leadStatus            String    @default("New Lead")
+  fileResult            String?
+  rejectionReason       String?
+  customRejectionReason String?
+  approvalAmount        Float?
+  loanAmount            Float?
+  premiumAmount         Float?
+  remarks               String?
+  nextFollowUpDate      DateTime?
+  branch                String?
+  region                String?
+  assignedToId          String
+  createdById           String
+  lastUpdatedById       String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  assignedTo   User      @relation("AssignedLeads", fields: [assignedToId], references: [id])
+  createdBy    User      @relation("CreatedLeads", fields: [createdById], references: [id])
+  auditLogs    AuditLog[]
+}
+
+model DropdownConfig {
+  id        String   @id @default(cuid())
+  type      String
+  value     String
+  label     String
+  sortOrder Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@unique([type, value])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  leadId    String
+  userId    String
+  action    String
+  changes   String?
+  createdAt DateTime @default(now())
+
+  lead   Lead @relation(fields: [leadId], references: [id])
+  user   User @relation(fields: [userId], references: [id])
+}

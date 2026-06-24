@@ -1,0 +1,7 @@
+.env.local
+node_modules/
+.next/
+prisma/crm.db
+prisma/crm.db-journal
+dev.log
+*.log
