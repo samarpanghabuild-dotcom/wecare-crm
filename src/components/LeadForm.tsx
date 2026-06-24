@@ -29,8 +29,7 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
     employmentType: '', leadStatus: 'New Lead',
     fileResult: '', rejectionReason: '', customRejectionReason: '',
     approvalAmount: '', loanAmount: '', premiumAmount: '',
-    remarks: '', nextFollowUpDate: '', branch: '', region: '',
-    assignedToId: '',
+    remarks: '', branch: '', region: '',
     ...initialData,
     nextFollowUpDate: initialData?.nextFollowUpDate
       ? new Date(initialData.nextFollowUpDate).toISOString().split('T')[0]
@@ -116,7 +115,6 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
         </div>
       )}
 
-      {/* Customer Info */}
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
         <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Customer Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -144,7 +142,6 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
         </div>
       </div>
 
-      {/* Product & Lead Info */}
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
         <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Lead Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -182,7 +179,6 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
         </div>
       </div>
 
-      {/* File Result */}
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
         <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">File Result</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -191,13 +187,13 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
           </Field>
           {showPositiveFields && (
             <>
-              <Field label="Approval Amount (₹)">
+              <Field label="Approval Amount (Rs.)">
                 <input className="input" type="number" value={form.approvalAmount} onChange={e => set('approvalAmount', e.target.value)} placeholder="0" />
               </Field>
-              <Field label="Loan Amount (₹)">
+              <Field label="Loan Amount (Rs.)">
                 <input className="input" type="number" value={form.loanAmount} onChange={e => set('loanAmount', e.target.value)} placeholder="0" />
               </Field>
-              <Field label="Premium Amount (₹)">
+              <Field label="Premium Amount (Rs.)">
                 <input className="input" type="number" value={form.premiumAmount} onChange={e => set('premiumAmount', e.target.value)} placeholder="0" />
               </Field>
             </>
@@ -217,7 +213,6 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
         </div>
       </div>
 
-      {/* Follow Up & Remarks */}
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-6">
         <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Follow Up & Remarks</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -230,7 +225,6 @@ export function LeadForm({ initialData, onSubmit, isEdit }: LeadFormProps) {
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex items-center justify-between">
         <button type="button" onClick={() => router.back()} className="btn-secondary">
           <ArrowLeft className="w-4 h-4" /> Back
